@@ -30,5 +30,14 @@ RUN \
   apt-get install sbt && \
   sbt sbtVersion
 
+# Force compiler bridge compilation
+RUN \
+  mkdir ~/tmp && \
+  cd ~/tmp && \
+  echo "object Main extends App {println(\"Done\")}" > Main.scala && \
+  sbt run && \
+  cd && \
+  rm -rf ~/tmp
+
 # Define working directory
 WORKDIR /root
